@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+
+import axios from 'axios';
 
 //HOC
 import DefaultLayout from '../layouts/DefaultLayout';
@@ -13,6 +15,33 @@ const HomePage = () => {
   const [recommendedMovies, setRecommendedMovies] = useState([]);
   const [premierMovies, setPremierMovies] = useState([]);
   const [onlineStreamEvent, setOnlineStreamEvent] = useState([]);
+
+  //For Recommended Movies
+  useEffect(() => {
+    const requestTopRatedMovies = async () => {
+      const getTopRatedMovies = await axios.get("https://api.themoviedb.org/3/movie/top_rated?api_key=c9c56bab3cda44b67a6a320e1bdfad10");
+      setRecommendedMovies(getTopRatedMovies.data.results);
+    }
+    requestTopRatedMovies();
+  })
+
+  //For Premier Movies
+  useEffect(() => {
+    const requestTopPopularMovies = async () => {
+      const getTopPopularMovies = await axios.get("https://api.themoviedb.org/3/movie/popular?api_key=c9c56bab3cda44b67a6a320e1bdfad10");
+      setPremierMovies(getTopPopularMovies.data.results);
+    }
+    requestTopPopularMovies();
+  })
+
+  //For online stream  Movies
+  useEffect(() => {
+    const requestTopOnlineStreamMovies = async () => {
+      const getTopOnlineStreamMovies = await axios.get("https://api.themoviedb.org/3/movie/upcoming?api_key=c9c56bab3cda44b67a6a320e1bdfad10");
+      setOnlineStreamEvent(getTopOnlineStreamMovies.data.results);
+    }
+    requestTopOnlineStreamMovies();
+  })
   return (
     <>
       <HeroCarousel />
@@ -55,7 +84,7 @@ const HomePage = () => {
           title="Online Streaming Events"
           subtitle="Online Streaming Events"
           poster={onlineStreamEvent}
-          isDark={true}
+          isDark={false}
         />
       </div>
     </>
