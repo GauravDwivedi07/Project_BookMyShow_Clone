@@ -19,7 +19,7 @@ const HomePage = () => {
   //For Recommended Movies
   useEffect(() => {
     const requestTopRatedMovies = async () => {
-      const getTopRatedMovies = await axios.get("https://api.themoviedb.org/3/movie/top_rated?api_key=c9c56bab3cda44b67a6a320e1bdfad10");
+      const getTopRatedMovies = await axios.get("/movie/top_rated");
       setRecommendedMovies(getTopRatedMovies.data.results);
     }
     requestTopRatedMovies();
@@ -28,7 +28,7 @@ const HomePage = () => {
   //For Premier Movies
   useEffect(() => {
     const requestTopPopularMovies = async () => {
-      const getTopPopularMovies = await axios.get("https://api.themoviedb.org/3/movie/popular?api_key=c9c56bab3cda44b67a6a320e1bdfad10");
+      const getTopPopularMovies = await axios.get("/movie/popular");
       setPremierMovies(getTopPopularMovies.data.results);
     }
     requestTopPopularMovies();
@@ -37,7 +37,7 @@ const HomePage = () => {
   //For online stream  Movies
   useEffect(() => {
     const requestTopOnlineStreamMovies = async () => {
-      const getTopOnlineStreamMovies = await axios.get("https://api.themoviedb.org/3/movie/upcoming?api_key=c9c56bab3cda44b67a6a320e1bdfad10");
+      const getTopOnlineStreamMovies = await axios.get("/movie/upcoming");
       setOnlineStreamEvent(getTopOnlineStreamMovies.data.results);
     }
     requestTopOnlineStreamMovies();
@@ -69,6 +69,7 @@ const HomePage = () => {
               alt='rupay'
               className='w-full h-full'
             />
+            
           </div>
           <PosterSlider
             title="Premier Movies"

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import HeroSlider from 'react-slick';
 import { NextArrow, PrevArrow } from './Arrows';
 const HeroCarousel = () => {
+
   const [images, setImages] = useState([
     {
       adult: false,
